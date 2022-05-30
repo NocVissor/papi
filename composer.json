@@ -1,14 +1,14 @@
 {
-    "name": "kaliostro/papi",
+    "name": "NocVissor/papi",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Kaliostro\\Papi\\": "src/"
+            "NocVissor\\Papi\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "kavenduro",
+            "name": "NocVissor",
             "email": "plyron@mail.ru"
         }
     ],

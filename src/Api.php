@@ -1,7 +1,7 @@
 <?php
-namespace Kaliostro\Papi;
+namespace NocVissor\Papi;
 
-use Kaliostro\Papi\Auth\Auth;
+use NocVissor\Papi\Auth\Auth;
 use Exception;
 
 class Api{

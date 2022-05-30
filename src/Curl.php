@@ -1,5 +1,5 @@
 <?php
-namespace Kaliostro\Papi;
+namespace NocVissor\Papi;
 
 use Exception;
 

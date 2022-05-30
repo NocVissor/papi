@@ -1,6 +1,6 @@
 <?php
-namespace Kaliostro\Papi\Auth;
-use Kaliostro\Papi\Request;
+namespace NocVissor\Papi\Auth;
+use NocVissor\Papi\Request;
 class TestAuth extends Auth{
     function __construct()
     {

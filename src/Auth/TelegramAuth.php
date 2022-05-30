@@ -1,7 +1,7 @@
 <?php
-namespace Kaliostro\Papi\Auth;
-use Kaliostro\Papi\Request;
-use Kaliostro\Papi\Api;
+namespace NocVissor\Papi\Auth;
+use NocVissor\Papi\Request;
+use NocVissor\Papi\Api;
 class TelegramAuth extends Auth{
     private $base_url = '';
     function __construct($token)
