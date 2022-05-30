@@ -1,6 +1,7 @@
 {
     "name": "NocVissor/papi",
     "type": "library",
+    "minimum-stability": "dev-master",
     "autoload": {
         "psr-4": {
             "NocVissor\\Papi\\": "src/"

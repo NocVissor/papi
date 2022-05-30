@@ -5,7 +5,7 @@ use NocVissor\Papi\Auth\Auth;
 use Exception;
 
 class Api{
-    private Auth $auth;
+    private ?Auth $auth = null;
     public Request $based_request;
     public string $base_url = '';
     public function __construct(string $url = '')
@@ -13,15 +13,21 @@ class Api{
         $this->base_url = $url;
         $this->based_request = new Request();
     }
-
+    // connect Auth class to Api
     public function auth(Auth $auth){
         $this->auth = $auth;
         $this->auth->link($this);
     } 
+    // set new Request
     public function setBase($request){
         $this->based_request = new Request($request);
     }
+    // add options Request
+    public function mergeBase($request){
+        $this->based_request = Request::merge($this->based_request, new Request($request));
+    }
     // required: url, method
+    // params: url, method, is_absolute, ch, request
     public function query($data){
         if(isset($data['request']) && $data['request']){
             $request = new Request($data['request']);
@@ -36,7 +42,11 @@ class Api{
         else{
             $url = $this->base_url.$data['url'];
         }
-        $result_request = Request::merge($request, $this->based_request, $this->auth->request);
+        $result_request = Request::merge($request, $this->based_request);
+        if(!is_null($this->auth)){
+            $result_request = Request::merge($result_request, $this->auth->request);
+        }
+        
 
         $result = Curl::query([
             'url' => $url,

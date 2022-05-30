@@ -27,6 +27,11 @@ class Curl {
 
     //required ch, url, method, request
     public static function query($data){
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+
         $request = $data['request'];
 
         if(!empty($request->post)){
