@@ -1,0 +1,18 @@
+{
+    "name": "kaliostro/papi",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Kaliostro\\Papi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kavenduro",
+            "email": "plyron@mail.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0"
+    }
+}
