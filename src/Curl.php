@@ -87,7 +87,6 @@ class Curl {
         }
 
         $result = curl_exec($ch);
-
         if($message = curl_error($ch)) {
             throw new Exception($message);
         }

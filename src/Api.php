@@ -7,11 +7,13 @@ use Exception;
 class Api{
     private ?Auth $auth = null;
     public Request $based_request;
+    public Cache $cache;
     public string $base_url = '';
     public function __construct(string $url = '')
     {
         $this->base_url = $url;
         $this->based_request = new Request();
+        $this->cache = new Cache();
     }
     // connect Auth class to Api
     public function auth(Auth $auth){
@@ -36,7 +38,10 @@ class Api{
             $request = new Request();
         }
 
-        if(isset($data['is_absolute']) && $data['is_absolute']){
+        if((isset($data['is_absolute']) && $data['is_absolute']) || 
+        strripos($data['url'], 'http://') === true ||
+        strripos($data['url'], 'https://') === true
+        ){
             $url = $data['url'];
         }
         else{
