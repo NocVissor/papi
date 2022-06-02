@@ -3,7 +3,7 @@
     "description": "php api client library",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "NocVissor\\Papi\\": "src/"
