@@ -22,17 +22,17 @@ class Api{
     } 
     // set new Request
     public function setBase($request){
-        $this->based_request = new Request($request);
+        $this->based_request = $request;
     }
     // add options Request
     public function mergeBase($request){
-        $this->based_request = Request::merge($this->based_request, new Request($request));
+        $this->based_request = Request::merge($this->based_request, $request);
     }
     // required: url, method
     // params: url, method, is_absolute, ch, request
     public function query($data){
-        if(isset($data['request']) && $data['request']){
-            $request = new Request($data['request']);
+        if(isset($data['request']) && !is_null($data['request'])){
+            $request = $data['request'];
         }
         else{
             $request = new Request();
@@ -64,35 +64,35 @@ class Api{
     }
 
 
-    public function get($url, $request = false){
+    public function get($url, Request $request = null){
         return $this->query([
             'url' => $url,
             'request' => $request,
             'method' => 'get'
         ]);
     }
-    public function post($url, $request = false){
+    public function post($url, Request $request = null){
         return $this->query([
             'url' => $url,
             'request' => $request,
             'method' => 'post'
         ]);
     }
-    public function put($url, $request = false){
+    public function put($url, Request $request = null){
         return $this->query([
             'url' => $url,
             'request' => $request,
             'method' => 'put'
         ]);
     }
-    public function patch($url, $request = false){
+    public function patch($url, Request $request = null){
         return $this->query([
             'url' => $url,
             'request' => $request,
             'method' => 'patch'
         ]);
     }
-    public function delete($url, $request = false){
+    public function delete($url, Request $request = null){
         return $this->query([
             'url' => $url,
             'request' => $request,

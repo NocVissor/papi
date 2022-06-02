@@ -27,7 +27,7 @@ class SkorozvonAuth extends Auth{
 
 
     private function get_token(){
-        $file = $this->api->post('https://app.skorozvon.ru/oauth/token', [
+        $file = $this->api->post('https://app.skorozvon.ru/oauth/token', new Request([
             'post' => [
                 'grant_type' => 'password',
                 'username' => $this->login,
@@ -35,13 +35,13 @@ class SkorozvonAuth extends Auth{
                 'client_id' => $this->id,
                 'client_secret' => $this->secret,
             ]
-        ]);
+        ]));
         $this->api->cache->put('skorozvon', json_encode($file));
 
         return $file->access_token;
     }
     private function refresh_token($access, $refresh){
-        $file = $this->api->post('https://app.skorozvon.ru/oauth/token', [
+        $file = $this->api->post('https://app.skorozvon.ru/oauth/token', new Request([
             'post' => [
                 'grant_type' => 'refresh_token',
                 'refresh_token' => $refresh,
@@ -51,7 +51,7 @@ class SkorozvonAuth extends Auth{
             'headers' => [
                 'Authorization' => 'Bearer '.$access
             ]
-        ]);
+        ]));
         $this->api->cache->put('skorozvon', json_encode($file));
         return $file->access_token;
     }

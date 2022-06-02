@@ -1,7 +1,9 @@
 {
-    "name": "NocVissor/papi",
+    "name": "noc-vissor/papi",
+    "description": "php api client library",
     "type": "library",
-    "minimum-stability": "dev-master",
+    "license": "MIT",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "NocVissor\\Papi\\": "src/"
