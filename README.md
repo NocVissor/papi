@@ -1,5 +1,5 @@
 # papi
-papi is a client library for working with API in an object oriented style
+papi is a client library for working with API in an object oriented style<br>
 install: composer require noc-vissor/papi
 <a href="#request">Request</a><br>
 <a href="#auth">Authorization</a><br>
