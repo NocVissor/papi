@@ -9,6 +9,7 @@ class Api{
     public Request $based_request;
     public Cache $cache;
     public string $base_url = '';
+    public $debug = false;
     public function __construct(string $url = '')
     {
         $this->base_url = $url;
@@ -51,13 +52,13 @@ class Api{
         if(!is_null($this->auth)){
             $result_request = Request::merge($result_request, $this->auth->request);
         }
-        
 
         $result = Curl::query([
             'url' => $url,
             'method' => $data['method'],
             'request' => $result_request,
-            'ch' => isset($data['ch'])?$data['ch']:false
+            'ch' => isset($data['ch'])?$data['ch']:false,
+            'debug' => $this->debug
         ]);
         $result = json_decode($result);
         return $result;

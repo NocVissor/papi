@@ -12,7 +12,12 @@ class Curl {
             foreach($data as $key => $value){
                 if(is_array($value)){
                     foreach($value as $k2 => $v2){
-                        $strs[] = urlencode($key)."[][label]=".urlencode($v2['label']);
+                        if(is_array($v2)){
+                            $strs[] = self::forfield_build($v2);
+                        }
+                        else{
+                            $strs[] = urlencode($key)."[][$k2]=".urlencode($v2);
+                        }
                     }
 
                 }
@@ -27,14 +32,19 @@ class Curl {
 
     //required ch, url, method, request
     public static function query($data){
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
+        if($data["debug"]){
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+        }
 
         $request = $data['request'];
+        //print_r($request);
 
-        if(!empty($request->post)){
+        if($request->post_raw){
+            $request->post = $request->post_raw;
+        }
+        else if(!empty($request->post) && $request->forfield){
             $request->post = self::forfield_build($request->post);
         }
 
@@ -42,13 +52,14 @@ class Curl {
         if(!empty($request->get)){
             $url .= '?'.http_build_query($request->get);
         }
-
+        
         if($data['ch']){
             $ch = $data['ch'];
         }
         else{
             $ch = curl_init();
         }
+        // echo  $url;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
         $postfields = false;
@@ -71,7 +82,6 @@ class Curl {
                 $postfields = true;
                 break;
         }
-
         if($postfields){
             if(!empty($request->post)){
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $request->post);
@@ -86,7 +96,17 @@ class Curl {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
 
+        if(!empty($request->curl_setpot)){
+            foreach($request->curl_setpot as $key=>$value){
+                curl_setopt($ch, $key, $value);
+            }
+        }
+
         $result = curl_exec($ch);
+        if($data["debug"]){
+            print_r($result);
+            echo "result";
+        }
         if($message = curl_error($ch)) {
             throw new Exception($message);
         }
