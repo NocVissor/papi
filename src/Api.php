@@ -19,7 +19,7 @@ class Api{
     // connect Auth class to Api
     public function auth(Auth $auth){
         $this->auth = $auth;
-        $this->auth->link($this);
+        return $this->auth->link($this);
     } 
     // set new Request
     public function setBase($request){
